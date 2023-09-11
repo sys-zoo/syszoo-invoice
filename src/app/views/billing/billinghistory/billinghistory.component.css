@@ -1,0 +1,24 @@
+th{
+    text-align: center;
+}
+
+.outbox{
+    display: flex;
+    justify-content: space-between;
+    gap:10px;
+}
+/* delete icon */
+.bi-trash{
+    color: red;
+    flex: 1;
+}
+/* edit icon */
+.bi-pencil{
+    color:green;
+    flex: 1;
+}
+.btn{
+    gap:10px;
+    
+    
+}

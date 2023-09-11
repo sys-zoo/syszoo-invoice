@@ -9,8 +9,12 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <!-- table head -->
                 <th scope="col">Invoices</th>
+                <th scope="col">Date</th>
+                <th scope="col">Amount</th> 
+                <th scope="col">Customer</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -21,9 +25,28 @@
                 <td>
                   <input value="{{itemIndex + 1}}" [disabled]="true" class="form-control">
                 </td>
+                <td>
+                  <input value="{{itemIndex + 1}}" [disabled]="true" class="form-control">
+                </td>
+                <td>
+                  <input value="{{itemIndex + 1}}" [disabled]="true" class="form-control">
+                </td>
+                <td>
+               <!-- edit and delete button -->
+                  <div class="container"> 
+                    <div class="outbox">
+                      <button class="btn ">
+                        <i class="bi bi-pencil"></i> 
+                      </button>
+                      <button class="btn">
+                        <i class="bi bi-trash"></i> 
+                      </button>
+                    </div>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
-        </main>
+        </main> 
     </div>
 </div>
