@@ -1,0 +1,152 @@
+<app-main-nav-tab></app-main-nav-tab>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto px-0">
+            <app-leftpanel></app-leftpanel>
+        </div>
+        <main class="col ps-md-2 pt-2">
+
+            <div class="container-fluid h-lg-100">
+                <div class="row justify-content-center h-lg-100">
+                    <div class="col-lg-12" >
+                         <div class="row" style="height:20vh;">
+                           <div class="row col-sm-12 col-lg-12">
+                            <div class="col-lg-4">
+                              <label for="exampleInputEmail1" class="form-label hidelbl">Invoice No</label>
+                              <input type="text" max="10" maxlength="10" placeholder ="Invoice No"  class="form-control ng-pristine ng-valid ng-touched" id="invoiceNo" name="InvoiceNo" [OnlyNumber]=true max="10" maxlength="10">
+                            </div>
+
+                             <div class="col-lg-4">
+                              <label for="exampleInputEmail1" class="form-label hidelbl"> Name</label>
+                               <input type="text" max="10" maxlength="10" placeholder="Customer Name" class="form-control ng-pristine ng-valid ng-touched" id="name" name="Name" [OnlyNumber]=true max="10" maxlength="10">
+                             </div>
+                             <div class="col-lg-4">
+                              <label for="exampleInputEmail1" class="form-label hidelbl">Mobile No</label>
+                               <input type="text" max="10" maxlength="10"  placeholder="Mobile" class="form-control ng-pristine ng-valid ng-touched" id="mobile" name="mobile" [OnlyNumber]=true max="10" maxlength="10">
+                             </div>
+                           </div>
+
+                         </div>
+                    </div>
+                    <div class="col-lg-12" >
+                        <div class="h-lg-100 d-flex flex-column">
+                            <div class="row justify-content-center bg-purple">
+                              <div #invoiceContent style="height:60vh;overflow:auto;">
+                                <label for="exampleInputEmail1" class="form-label">Invoice Items</label>
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col" style="width: 5%;">#</th>
+                                      <th scope="col" style="width: 10%;">Date</th>
+                                      <th scope="col" style="width: 15%;">ProductID</th>
+                                      <th scope="col">Name</th>
+                                      <th scope="col" style="width: 5%;">Quantity</th>
+                                      <th scope="col" style="width: 10%;">Price</th>
+                                      <th scope="col" style="width: 10%;">Amount</th>
+                                      <th scope="col">Action</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let invoiceItem of listOfInvoiceItem; let itemIndex = index;">
+                                      <th scope="row">
+                                        <input value="{{itemIndex + 1}}" (focus)="onInvoiceItemFocus(itemIndex)" [disabled]="true" class="form-control ng-pristine ng-valid ng-touched">
+                                      </th>
+                                      <td>
+                                        <input (focus)="onInvoiceItemFocus(itemIndex)" class="form-control ng-pristine ng-valid ng-touched">
+                                      </td>
+                                      <td>
+                                        <input [(ngModel)]="invoiceItem.id" (focus)="onInvoiceItemFocus(itemIndex)" list="productIds" class="form-control ng-pristine ng-valid ng-touched">
+                                        <datalist id="productIds">
+                                          <option *ngFor="let opt of listOfProducIds" [value]="opt">
+                                        </datalist>
+                                      </td>
+                                      <td>
+                                        <input [(ngModel)]="invoiceItem.name" (focus)="onInvoiceItemFocus(itemIndex)"  list="products" class="form-control ng-pristine ng-valid ng-touched">
+                                        <datalist id="products">
+                                          <option *ngFor="let opt of listOfProducts" [value]="opt">
+                                        </datalist>
+                                      </td>
+                                      <td>
+                                        <input type="number" min="0" [(ngModel)]="invoiceItem.quantity" (ngModelChange)="onItemSpecChange(itemIndex)" (focus)="onInvoiceItemFocus(itemIndex)" [OnlyNumber]=true  class="form-control ng-pristine ng-valid ng-touched">
+                                      </td>
+                                      <td>
+                                        <input type="number" min="0" [(ngModel)]="invoiceItem.price" (ngModelChange)="onItemSpecChange(itemIndex)" (focus)="onInvoiceItemFocus(itemIndex)" [OnlyNumber]=true  class="form-control ng-pristine ng-valid ng-touched">
+                                      </td>
+                                      <td>
+                                        <input [(ngModel)]="invoiceItem.totalPrice" (focus)="onInvoiceItemFocus(itemIndex)"  [disabled]="true" class="form-control ng-pristine ng-valid ng-touched">
+                                      </td>
+                                      <td>
+                                        <i class="fa fa-trash text-danger hyper-link"
+                                                    (click)="onInvoiceItemDelete(itemIndex)" ></i>
+                                      </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                              </div>
+                              <div class="row">
+                                <div class="col-lg-8">
+                                </div>
+                                <div class="col-lg-4" >
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12" >
+                         <div style="height:100%;">
+
+                           <div class="row" style="height:25vh;">
+
+                             <div class="row col-lg-6">
+                             </div>
+
+                             <div class="row col-lg-6">
+                               <div class="col-sm-6 col-lg-9 float-right">
+                                 <label  class="float-right"  style="width:100%;text-align:right;">Total Amount</label>
+                               </div>
+                               <div class="col-lg-3">
+                                 <input [(ngModel)]="this.totalAmount" type="number" [disabled]="true"  class="form-control ng-pristine ng-valid ng-touched" [OnlyNumber]=true max="10" maxlength="10">
+                               </div>
+
+                               <div class="col-lg-9">
+                                 <label class="float-right" style="width:100%;text-align:right;">Tax</label>
+                               </div>
+                               <div class="col-lg-3">
+                                 <input type="number" class="form-control ng-pristine ng-valid ng-touched"  [OnlyNumber]=true max="10" maxlength="10">
+                               </div>
+                             </div>
+
+                             <div class="row col-lg-6">
+
+                             </div>
+
+                             <br/>
+
+                             <div class="row col-lg-6">
+
+                               <div class="col">
+                               </div>
+
+                               <div class="col">
+                                 <button class="btn btn-primary w-100 rounded-2">
+                                   Save
+                                 </button>
+                               </div>
+
+                               <div class="col">
+                                 <button class="btn btn-primary w-100 rounded-2">
+                                   Save/Print
+                                 </button>
+                               </div>
+
+                             </div>
+                             <br/>
+                           </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>

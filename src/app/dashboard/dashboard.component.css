@@ -1,0 +1,13 @@
+.con{
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+.card-body{
+    background-color: #cad6f5;
+}

@@ -1,0 +1,29 @@
+<app-main-nav-tab></app-main-nav-tab>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto px-0">
+            <app-leftpanel></app-leftpanel>
+        </div>
+        <main class="col ps-md-2 pt-2">
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Invoices</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let invoiceItem of listOfInvoice; let itemIndex = index;">
+                <td>
+                  <input value="{{itemIndex + 1}}" [disabled]="true" class="form-control">
+                </td>
+                <td>
+                  <input value="{{itemIndex + 1}}" [disabled]="true" class="form-control">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </main>
+    </div>
+</div>
