@@ -1,6 +1,23 @@
-@media only screen and (max-width: 568px) {
-  
+.floatLeft { width: 60%; float: left; }
+.floatRight {width: 40%; float: right; }
+.container { overflow: hidden; }
+.sno{
+   width: 8%;
+}
+.date{
+   width: 15%;
+}
+@media only screen and (max-width: 767px) {
+
    .hidelbl{
     display: none;
+   }
+   .floatLeft { width: 100%; }
+   .floatRight {width: 100%; }
+   .sno{
+      width: 15%;
+   }
+   .date{
+      width: auto;
    }
   }
