@@ -1,24 +1,33 @@
-th{
-    text-align: center;
-}
+@media only screen and (max-width: 800px) {
+    
+	#no-more-tables table, 
+	#no-more-tables thead, 
+	#no-more-tables tbody, 
+	#no-more-tables th, 
+	#no-more-tables td, 
+	#no-more-tables tr { 
+		display: block; 
+	}
+ 
+	/* Hide table headers (but not display: none;, for accessibility) */
+	#no-more-tables thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+ 
+	/* #no-more-tables tr { border: 1px solid #ccc; } */
+ 
+	#no-more-tables td { 
+		display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        
+	}
+    #no-more-tables td input{
+        width: 75%;
+    }
 
-.outbox{
-    display: flex;
-    justify-content: space-between;
-    gap:10px;
-}
-/* delete icon */
-.bi-trash{
-    color: red;
-    flex: 1;
-}
-/* edit icon */
-.bi-pencil{
-    color:green;
-    flex: 1;
-}
-.btn{
-    gap:10px;
-    
-    
+	#no-more-tables td:before { content: attr(data-title); }
 }
