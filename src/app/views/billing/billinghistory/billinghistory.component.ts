@@ -9,6 +9,10 @@ import { Invoice } from 'src/app/model/response/invoice';
 })
 export class BillinghistoryComponent {
 
+  isFormDisabled: boolean = true;
+
+  
+
   listOfInvoice : Array<Invoice> = [];
 
   ngOnInit() {
@@ -28,5 +32,11 @@ export class BillinghistoryComponent {
       console.log(this.listOfInvoice);
       return true;
   }
+
+  toDisableinput(index:number){
+       this.isFormDisabled[index]= !this.isFormDisabled;
+  }
+
+
 
 }
