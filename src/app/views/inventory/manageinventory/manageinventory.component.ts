@@ -35,9 +35,12 @@ export class ManageinventoryComponent implements OnInit {
     }
 
     onItemSpecChange(index) {
+     
     }
 
     onItemDelete(index) {
-
+      if(index < this.listOfProductsItem.length) {
+        this.listOfProductsItem.splice(index , 1);
     }
+}
 }

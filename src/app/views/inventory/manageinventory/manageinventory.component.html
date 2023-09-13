@@ -61,7 +61,7 @@
                                       <td>
                                         <input [(ngModel)]="productItem.id" (focus)="onItemFocus(itemIndex)" list="productIds" class="form-control ng-pristine ng-valid ng-touched">
                                       </td>
-                                      <td>
+                                      <td >
                                         <input [(ngModel)]="productItem.name" (focus)="onItemFocus(itemIndex)"  list="products" class="form-control ng-pristine ng-valid ng-touched">
                                         <datalist id="products">
                                           <option *ngFor="let opt of listOfProductsItem" [value]="opt">
