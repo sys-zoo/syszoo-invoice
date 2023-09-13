@@ -12,18 +12,27 @@
                          <div class="row" style="height:20vh;">
                            <div class="row col-sm-12 col-lg-12">
                             <div class="col-lg-4">
-                              <label for="exampleInputEmail1" class="form-label hidelbl">Invoice No</label>
-                              <input type="text" max="10" maxlength="10" placeholder ="Invoice No"  class="form-control ng-pristine ng-valid ng-touched" id="invoiceNo" name="InvoiceNo" [OnlyNumber]=true max="10" maxlength="10">
+                              <label for="exampleInputEmail1 validationCustom01" class="form-label hidelbl">Invoice No</label>
+                              <input type="text" [formControl]="invoiceNo" max="10" maxlength="10" placeholder ="Invoice No"  class=" form-control ng-pristine ng-valid ng-touched {{invoiceNo.hasError('required') && invoiceNo.touched ?'is-invalid':''}} " id="invoiceNo validationCustom01" name="InvoiceNo" [OnlyNumber]=true max="10" maxlength="10">
+                              <div class="invalid-feedback">
+                                Please enter invoice number
+                              </div>
                             </div>
 
                              <div class="col-lg-4 col-md-6" >
                               <label for="exampleInputEmail1" class="form-label hidelbl"> Name</label>
-                               <input type="text" max="10" maxlength="10" placeholder="Customer Name" class="form-control ng-pristine ng-valid ng-touched" id="name" name="Name" [OnlyNumber]=true max="10" maxlength="10">
-                             </div>
+                               <input type="text" max="10" [formControl]="name" maxlength="10" placeholder="Customer Name" class="form-control ng-pristine ng-valid ng-touched {{name.hasError('required') && name.touched ?'is-invalid':''}}" id="name" name="Name" [OnlyNumber]=true max="10" maxlength="10">
+                               <div class="invalid-feedback">
+                                Please enter custmer name
+                              </div>
+                              </div>
                              <div class="col-lg-4 col-md-6">
                               <label for="exampleInputEmail1" class="form-label hidelbl">Mobile No</label>
-                               <input type="text" max="10" maxlength="10"  placeholder="Mobile" class="form-control ng-pristine ng-valid ng-touched" id="mobile" name="mobile" [OnlyNumber]=true max="10" maxlength="10">
-                             </div>
+                               <input type="text" max="10" [formControl]="mobileNo" maxlength="10"  placeholder="Mobile" class="form-control ng-pristine ng-valid ng-touched {{mobileNo.hasError('required') && mobileNo.touched ?'is-invalid':''}}" id="mobile" name="mobile" [OnlyNumber]=true max="10" maxlength="10">
+                               <div class="invalid-feedback">
+                                Please enter mobile number
+                              </div>
+                              </div>
                            </div>
 
                          </div>
@@ -49,13 +58,13 @@
                                   <tbody>
                                     <tr *ngFor="let invoiceItem of listOfInvoiceItem; let itemIndex = index;">
                                       <th scope="row">
-                                        <input value="{{itemIndex + 1}}" (focus)="onInvoiceItemFocus(itemIndex)" [disabled]="true" class="form-control ng-pristine ng-valid ng-touched">
+                                        <input value="{{itemIndex + 1}}" (focus)="onInvoiceItemFocus(itemIndex)" [disabled]="true" class="form-control ng-pristine ng-valid ng-touched" >
                                       </th>
                                       <td>
-                                        <input (focus)="onInvoiceItemFocus(itemIndex)" class="form-control ng-pristine ng-valid ng-touched">
+                                        <input [formControl]="date" (focus)="onInvoiceItemFocus(itemIndex)" class="form-control ng-pristine ng-valid ng-touched">
                                       </td>
                                       <td>
-                                        <input [(ngModel)]="invoiceItem.id" (focus)="onInvoiceItemFocus(itemIndex)" list="productIds" class="form-control ng-pristine ng-valid ng-touched">
+                                        <input  [(ngModel)]="invoiceItem.id" (focus)="onInvoiceItemFocus(itemIndex)" list="productIds" class="form-control ng-pristine ng-valid ng-touched">
                                         <datalist id="productIds">
                                           <option *ngFor="let opt of listOfProducIds" [value]="opt">
                                         </datalist>
@@ -131,7 +140,7 @@
                                </div>
 
                                <div class="col">
-                                 <button class="btn btn-primary w-100 rounded-2">
+                                 <button class="btn btn-primary w-100 rounded-2" (click)="onSaveInvoices()">
                                    Save
                                  </button>
                                </div>

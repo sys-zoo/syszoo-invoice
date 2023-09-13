@@ -1,32 +1,26 @@
 import { Component, VERSION, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Invoice } from 'src/app/model/response/invoice';
+import { InvoiceDataService } from 'src/app/service/invoice-data.service';
 
 
 @Component({
   selector: 'app-billinghistory',
   templateUrl: './billinghistory.component.html',
-  styleUrls: ['./billinghistory.component.css']
+  styleUrls: ['./billinghistory.component.css'],
+  providers: [InvoiceDataService]
 })
 export class BillinghistoryComponent {
-
-  listOfInvoice : Array<Invoice> = [];
-
+  constructor(private data111: InvoiceDataService){
+  }
+  // listOfInvoiceData;
   ngOnInit() {
     //this.setOptions();
     this.getInvoices();
   }
-
   getInvoices() {
-      var index = this.listOfInvoice.length + 1;
-      var newItem : Invoice = {quantity:null, price:null};
-      this.listOfInvoice.push(newItem);
-      this.listOfInvoice.push(newItem);
-      this.listOfInvoice.push(newItem);
-      this.listOfInvoice.push(newItem);
-      this.listOfInvoice.push(newItem);
-
-      console.log(this.listOfInvoice);
-      return true;
+      // var index = this.listOfInvoice.length + 1;
+      const data = this.data111.getDataObservable();
+      // this.listOfInvoice.push(newItem);
+      console.log(data);
   }
 
 }
