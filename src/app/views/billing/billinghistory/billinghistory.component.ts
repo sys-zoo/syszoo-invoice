@@ -9,26 +9,21 @@ import { InvoiceDataService } from 'src/app/service/invoice-data.service';
   providers: [InvoiceDataService]
 })
 export class BillinghistoryComponent {
-  constructor(private data111: InvoiceDataService){
-  }
-  listOfInvoice = [];
-  ngOnInit() {
-    //this.setOptions();
-    this.getInvoices();
-  }
-  getInvoices() {
-      // var index = this.listOfInvoice.length + 1;
-      const data = this.data111.getDataObservable();
-      this.listOfInvoice.push(data);
-      console.log(data);
-  }
 
+  listOfInvoice = [];
   isFormDisabled:boolean = true;
 
-  toDisableinput(index:number){
-       this.isFormDisabled[index]= !this.isFormDisabled;
+  constructor(private invoiceDataService: InvoiceDataService){
+     this.listOfInvoice = this.invoiceDataService.getAll();
+     console.log("listOfInvoice " + this.listOfInvoice.length);
   }
 
+  ngOnInit() {
 
+  }
+
+  toDisableinput(index:number){
+     this.isFormDisabled[index]= !this.isFormDisabled;
+  }
 
 }

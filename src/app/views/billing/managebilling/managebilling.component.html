@@ -25,7 +25,7 @@
                   <label for="exampleInputEmail1" class="form-label hidelbl"> Name</label>
                   <input type="text" max="10" [formControl]="name" maxlength="10" placeholder="Customer Name"
                     class="form-control ng-pristine ng-valid ng-touched {{name.hasError('required') && name.touched ?'is-invalid':''}}"
-                    id="name" name="Name" [OnlyNumber]=true max="10" maxlength="10">
+                    id="name" name="Name" >
                   <div class="invalid-feedback">
                     Please enter custmer name
                   </div>

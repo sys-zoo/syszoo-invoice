@@ -6,6 +6,7 @@ import { mixinDisabled } from '@angular/material/core';
 import { Customer } from 'src/app/model/response/Customer';
 import { InvoiceDataService} from 'src/app/service/invoice-data.service';
 import { Console } from 'console';
+import { Router } from "@angular/router";
 
 
 
@@ -28,6 +29,14 @@ export class ManagebillingComponent implements OnInit {
   listOfInvoiceItem : Array<InvoiceItem> = [];
   customerList :Array<Customer> = [];
   totalAmount : number = null;
+
+  invoiceNo = new FormControl(null, Validators.required);
+  mobileNo = new FormControl(null, Validators.required);
+  name = new FormControl(null, Validators.required);
+  date = new FormControl(null, Validators.required);
+
+
+  constructor(public router: Router, private invoiceDataService: InvoiceDataService) {}
 
   ngOnInit() {
     // this.onSaveInvoices();
@@ -81,45 +90,27 @@ export class ManagebillingComponent implements OnInit {
     this.totalAmount = totalAmount;
   }
 
-  /*getTotalPrice(index) : number {
-    if(index < this.listOfInvoiceItem.length) {
-       return this.listOfInvoiceItem[index].totalPrice;
-    }
-    return null;
-  }*/
-  invoiceNo = new FormControl(null, Validators.required);
-  mobileNo = new FormControl(null, Validators.required);
-  name = new FormControl(null, Validators.required);
-  // index = new FormControl(, Validators.required);
-  date = new FormControl(null, Validators.required);
-  // productID = new FormControl(null, Validators.required);
-  // productName = new FormControl(null, Validators.required);
-  // price = new FormControl(null, Validators.required);
-  // qut = new FormControl(null, Validators.required);
-  // amount = new FormControl(null, Validators.required);
-  
+  onSaveInvoices(){
 
-
-
-
-  constructor(private dataService: InvoiceDataService) {}
-  onSaveInvoices() : void{
+    console.log("onSaveInvoices called");
     var invoiceData = {
       date: this.date.value,
       customerName: this.name.value,
       invoices: this.invoiceNo.value,
       amount: this.totalAmount,
     };
-    this.dataService.setData(invoiceData)
-  // // var invoiceData:{} = {
-  // //   date: "2323",
-  // //   customerName: "2323232lak",
-  // //   invoices: 1121,
-  // //   amount: 121212,
-  // // };
-  // // this.dataService.setData(invoiceData);
-  const data = this.dataService.getDataObservable();
-  console.log(data);
-  }
-}
 
+    this.invoiceDataService.add(invoiceData);
+    alert("Invoice saved successfully");
+    this.router.navigate(['/billing-history']);
+
+  }
+
+  /*getTotalPrice(index) : number {
+    if(index < this.listOfInvoiceItem.length) {
+       return this.listOfInvoiceItem[index].totalPrice;
+    }
+    return null;
+  }*/
+
+}
