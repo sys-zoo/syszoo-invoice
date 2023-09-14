@@ -1,5 +1,7 @@
 import { Component, VERSION, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { InvoiceDataService } from 'src/app/service/invoice-data.service';
+import { Router } from '@angular/router';
+import { InvoiceItem } from 'src/app/model/response/invoice-item';
 
 
 @Component({
@@ -11,9 +13,9 @@ import { InvoiceDataService } from 'src/app/service/invoice-data.service';
 export class BillinghistoryComponent {
 
   listOfInvoice = [];
-  isFormDisabled:boolean = true;
+  isFormDisabled:boolean = false;
 
-  constructor(private invoiceDataService: InvoiceDataService){
+  constructor(private invoiceDataService: InvoiceDataService,private router:Router){
      this.listOfInvoice = this.invoiceDataService.getAll();
      console.log("listOfInvoice " + this.listOfInvoice.length);
   }
@@ -26,4 +28,38 @@ export class BillinghistoryComponent {
      this.isFormDisabled[index]= !this.isFormDisabled;
   }
 
+
+  //  onInvoiceItemDelete(index) {
+    
+  //   if(index < this.listOfInvoice.length) {
+  //       this.listOfInvoice.splice(index , 1);
+  //   }
+    
+  //    this.invoiceDataService.delete(index);
+  //   }
+
+  //  onInvoiceItemDelete(index){
+  //    if(index => 0 && index <= this.listOfInvoice.length){
+  //     this.listOfInvoice.splice(index,1)
+  //   }
+  // }
+
+
+  
+
+  delete(index){
+    if(index < this.listOfInvoice.length)
+       this.listOfInvoice.splice(index, 1)
+  }
+
+  getRoutValue(){
+    this.router.navigate(['/manage-billing']);
+
+    //  find the index
+
+    for(var i  in this.listOfInvoice){
+      console.log("the index of" + i);
+    }
+  }
+    
 }

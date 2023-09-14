@@ -50,4 +50,17 @@ export class InvoiceDataService {
     var jSOnArray = JSON.stringify(this.invoiceList);
     this.localStorageService.saveData(this.storageKey, jSOnArray);
   }
+  // delete(index){
+  //   this.localStorageService.removeData(index);
+  // }
+
+//  getArray(){
+//      return this.localStorageService;
+//  }
+
+// delete(index:number){
+//   this.invoiceList.splice(index);
+
+// }
+
 }
