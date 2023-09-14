@@ -1,11 +1,8 @@
-import { Component, VERSION, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { InvoiceItem } from 'src/app/model/response/invoice-item';
 import { FormControl, Validators } from '@angular/forms';
-import { disableDebugTools } from '@angular/platform-browser';
-import { mixinDisabled } from '@angular/material/core';
 import { Customer } from 'src/app/model/response/Customer';
-import { InvoiceDataService} from 'src/app/service/invoice-data.service';
-import { Console } from 'console';
+import { InvoiceDataService } from 'src/app/service/invoice-data.service';
 import { Router } from "@angular/router";
 
 
@@ -26,17 +23,24 @@ export class ManagebillingComponent implements OnInit {
   products = ["Internet Explorer", "Edge", "Firefox", "Chrome", "Opera", "Safari"]
   listOfProducts = [""]
   listOfProducIds = [""]
-  listOfInvoiceItem : Array<InvoiceItem> = [];
-  customerList :Array<Customer> = [];
-  totalAmount : number = null;
+  listOfInvoiceItem: Array<InvoiceItem> = [];
+  customerList: Array<Customer> = [];
+  totalAmount: number = null;
+  isError: boolean = false;
 
   invoiceNo = new FormControl(null, Validators.required);
   mobileNo = new FormControl(null, Validators.required);
   name = new FormControl(null, Validators.required);
-  date = new FormControl(null, Validators.required);
+  // date = new FormControl(null, Validators.required);
+  // productId = new FormControl(null, Validators.required);
+  // prodectName = new FormControl(this.listOfInvoiceItem[].prodects, Validators.required);
+  // price = new FormControl(Validators.required);
+  CurrentDate = new Date();
+  date = this.CurrentDate.getDate() + "/" + this.CurrentDate.getMonth() + "/" + this.CurrentDate.getFullYear();
 
-
-  constructor(public router: Router, private invoiceDataService: InvoiceDataService) {}
+  constructor(public router: Router, private invoiceDataService: InvoiceDataService) {
+    console.log(this.date);
+  }
 
   ngOnInit() {
     // this.onSaveInvoices();
@@ -50,26 +54,26 @@ export class ManagebillingComponent implements OnInit {
   }
 
   onInvoiceItemFocus(focusedRow) {
-     console.log("focusedRow " + focusedRow);
-     if(focusedRow == this.listOfInvoiceItem.length - 1) //last row
-     {
-        this.addInvoiceItem();
-     }
+    console.log("focusedRow " + focusedRow);
+    if (focusedRow == this.listOfInvoiceItem.length - 1) //last row
+    {
+      this.addInvoiceItem();
+    }
   }
 
   addInvoiceItem() {
-      var index = this.listOfInvoiceItem.length + 1;
-      var newItem : InvoiceItem = {quantity:null, price:null};
-      this.listOfInvoiceItem.push(newItem);
-      console.log(this.listOfInvoiceItem);
-      this.invoiceContent.nativeElement.scrollTo({left: 0 , top: this.invoiceContent.nativeElement.scrollHeight - 100, behavior: 'smooth'});
+    var index = this.listOfInvoiceItem.length + 1;
+    var newItem: InvoiceItem = { quantity: null, price: null };
+    this.listOfInvoiceItem.push(newItem);
+    console.log(this.listOfInvoiceItem);
+    this.invoiceContent.nativeElement.scrollTo({ left: 0, top: this.invoiceContent.nativeElement.scrollHeight - 100, behavior: 'smooth' });
 
-      return true;
+    return true;
   }
 
   onInvoiceItemDelete(index) {
-    if(index < this.listOfInvoiceItem.length) {
-        this.listOfInvoiceItem.splice(index , 1);
+    if (index < this.listOfInvoiceItem.length) {
+      this.listOfInvoiceItem.splice(index, 1);
     }
     this.getInvoiceTotal();
   }
@@ -81,8 +85,8 @@ export class ManagebillingComponent implements OnInit {
 
   getInvoiceTotal() {
     var totalAmount = 0;
-    for(let invoiceItem of this.listOfInvoiceItem){
-      if(invoiceItem.totalPrice && invoiceItem.totalPrice > 0) {
+    for (let invoiceItem of this.listOfInvoiceItem) {
+      if (invoiceItem.totalPrice && invoiceItem.totalPrice > 0) {
         totalAmount += invoiceItem.totalPrice;
       }
     }
@@ -90,20 +94,27 @@ export class ManagebillingComponent implements OnInit {
     this.totalAmount = totalAmount;
   }
 
-  onSaveInvoices(){
+  onSaveInvoices() {
 
-    console.log("onSaveInvoices called");
-    var invoiceData = {
-      date: this.date.value,
-      customerName: this.name.value,
-      invoices: this.invoiceNo.value,
-      amount: this.totalAmount,
-    };
+    if (this.listOfInvoiceItem[0].price !== null && this.listOfInvoiceItem[0].quantity !== null && this.listOfInvoiceItem[0].id !== null && this.listOfInvoiceItem && this.totalAmount !== 0 && this.mobileNo.valid && this.name.valid && this.invoiceNo.valid) {
+      console.log("onSaveInvoices called");
+      var invoiceData = {
+        date: this.date,
+        customerName: this.name.value,
+        invoices: this.invoiceNo.value,
+        amount: this.totalAmount,
+      };
 
-    this.invoiceDataService.add(invoiceData);
-    alert("Invoice saved successfully");
-    this.router.navigate(['/billing-history']);
-
+      this.invoiceDataService.add(invoiceData);
+      alert("Invoice saved successfully");
+      this.router.navigate(['/billing-history']);
+    } else {
+      this.isError = true;
+      alert("Please fill all the fields");
+    }
+  }
+  onPrintAndSaveInvoice() {
+    this.onSaveInvoices();
   }
 
   /*getTotalPrice(index) : number {
