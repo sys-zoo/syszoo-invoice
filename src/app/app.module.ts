@@ -25,6 +25,7 @@ import { BookinghistoryComponent } from './views/booking/bookinghistory/bookingh
 import { MainNavTabComponent } from './views/shared/main-nav-tab/main-nav-tab.component';
 import { LeftpanelComponent } from './views/shared/leftpanel/leftpanel.component';
 import { InvoiceDataService } from './service/invoice-data.service';
+import { ProductService } from './service/product.service'
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { InvoiceDataService } from './service/invoice-data.service';
     MatToolbarModule,
     MatIconModule,
   ],
-  providers: [importProvidersFrom(MatNativeDateModule), InvoiceDataService],
+  providers: [importProvidersFrom(MatNativeDateModule), InvoiceDataService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
