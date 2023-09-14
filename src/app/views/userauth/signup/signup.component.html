@@ -9,45 +9,49 @@
   
                   <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
   
-                  <form class="mx-1 mx-md-4">
+                  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" id="form3Example1c" class="form-control" />
-                        <label class="form-label" for="form3Example1c">Name</label>
-                      </div>
+                        <label for="FullName">Full Name</label>
+                        <input formControlName="FullName" (ngClass)="{'is-invalid':Submitted && registerForm.controls.FullName.errors}" type="text" class="form-control" />
+                       </div>
                     </div>
   
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="email" id="form3Example3c" class="form-control" />
                         <label class="form-label" for="form3Example3c">Email</label>
+                        <input type="email" id="form3Example3c" class="form-control" />
+                        
                       </div>
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="email" id="form3Example3c" class="form-control" />
                         <label class="form-label" for="form3Example3c">Mobile No.</label>
+                        <input type="email" id="form3Example3c" class="form-control" />
+                       
                       </div>
                     </div>
   
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="form3Example4c" class="form-control" />
                         <label class="form-label" for="form3Example4c">Password</label>
+                        <input type="password" id="form3Example4c" class="form-control" />
+                        
                       </div>
                     </div>
   
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="form3Example4cd" class="form-control" />
                         <label class="form-label" for="form3Example4cd">Confirm password</label>
+                        <input type="password" id="form3Example4cd" class="form-control" />
+                        
                       </div>
                     </div>
   
