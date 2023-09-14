@@ -38,6 +38,11 @@ export class ProductService {
     this.saveToLoacalStorage();
   }
 
+  removeData(){
+    this.localStorageService.clearData()
+  }
+
+
   stuffLocalArray() {
     let invoiceJson  = this.localStorageService.getData(this.storageKey);
     let jsonObj = JSON.parse(invoiceJson); // string to "any" object first

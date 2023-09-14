@@ -9,7 +9,7 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class ManageinventoryComponent implements OnInit {
 
-  listOfProductsItem: Array<ProductItem> = [];
+  listOfProductsItem: Array<ProductItem> = []; validation:boolean=false;
   constructor(private ProductData: ProductService) { 
     var datas=this.ProductData.getAll();
     for(var data of datas){
@@ -54,35 +54,43 @@ export class ManageinventoryComponent implements OnInit {
     }
   }
   onSaveProductList() {
-    for (var list of this.listOfProductsItem) {
-     if(list.id !== undefined && list.price !== null)
-      {   var productData = {
-          id: list.id,
-          name: list.name,
-          quantity: list.price,
-          price: list.quantity
-        }
+  
+    this.datas = this.ProductData.getAll();
+    // for(var i = 0; i < datas.length; i++){
+    // this  this.listOfProductsItem[i].id = datas[i].id;
+    //   this.listOfProductsItem[i].name = datas[i].name;
+    //   this.listOfProductsItem[i].price = datas[i].price;
+    //   this.listOfProductsItem[i].quantity = datas[i].quantity;
+    // }
+    // while(this.listOfProductsItem.length){
+    //   this.listOfProductsItem.pop()
+    // }
+    // this.listOfProductsItem.push(this.datas);
+    // console.log(this.listOfProductsItem);
 
-        this.ProductData.add(productData);}
+    if(this.listOfProductsItem[0].price!==null && this.listOfProductsItem[0].quantity !==null && this.listOfProductsItem[0].name !==null )
+          {
+            for (var list of this.listOfProductsItem) {
+              if(list.id !== undefined && list.price !== null)
+               {   var productData = {
+                   id: list.id,
+                   name: list.name,
+                   quantity: list.price,
+                   price: list.quantity
+                 }
+         
+                 this.ProductData.add(productData);}
+         
+             }
+             alert("successful");
+          }else
+          {
+            this.validation=true;
+            alert("Please fill all the fields")
+          }
 
-    }
-    alert("successful");
-  //   this.datas = this.ProductData.getAll();
-  //   // for(var i = 0; i < datas.length; i++){
-  //   // this  this.listOfProductsItem[i].id = datas[i].id;
-  //   //   this.listOfProductsItem[i].name = datas[i].name;
-  //   //   this.listOfProductsItem[i].price = datas[i].price;
-  //   //   this.listOfProductsItem[i].quantity = datas[i].quantity;
-  //   // }
-  //   while(this.listOfProductsItem.length){
-  //     this.listOfProductsItem.pop()
-  //   }
-  //   this.listOfProductsItem.push(this.datas);
-  //   console.log(this.listOfProductsItem);
-
-  //   if(this.listOfProductsItem[0].price!==null && this.listOfProductsItem[0].quantity !==null && this.listOfProductsItem )
-  // }
-
-  // validation:boolean=false;
+  //
+  
   }
 }
+
