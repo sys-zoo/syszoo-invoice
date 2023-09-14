@@ -1,5 +1,6 @@
 export class InvoiceItem {
-    id?:String;
+    date?: String;
+    id?:String = null;
     name?:String;
     totalPrice?:number = null;
 

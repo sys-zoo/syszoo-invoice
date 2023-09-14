@@ -1,32 +1,29 @@
 import { Component, VERSION, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Invoice } from 'src/app/model/response/invoice';
+import { InvoiceDataService } from 'src/app/service/invoice-data.service';
 
 
 @Component({
   selector: 'app-billinghistory',
   templateUrl: './billinghistory.component.html',
-  styleUrls: ['./billinghistory.component.css']
+  styleUrls: ['./billinghistory.component.css'],
+  providers: [InvoiceDataService]
 })
 export class BillinghistoryComponent {
 
-  listOfInvoice : Array<Invoice> = [];
+  listOfInvoice = [];
+  isFormDisabled:boolean = true;
 
-  ngOnInit() {
-    //this.setOptions();
-    this.getInvoices();
+  constructor(private invoiceDataService: InvoiceDataService){
+     this.listOfInvoice = this.invoiceDataService.getAll();
+     console.log("listOfInvoice " + this.listOfInvoice.length);
   }
 
-  getInvoices() {
-      var index = this.listOfInvoice.length + 1;
-      var newItem : Invoice = {quantity:null, price:null};
-      this.listOfInvoice.push(newItem);
-      this.listOfInvoice.push(newItem);
-      this.listOfInvoice.push(newItem);
-      this.listOfInvoice.push(newItem);
-      this.listOfInvoice.push(newItem);
+  ngOnInit() {
 
-      console.log(this.listOfInvoice);
-      return true;
+  }
+
+  toDisableinput(index:number){
+     this.isFormDisabled[index]= !this.isFormDisabled;
   }
 
 }

@@ -20,26 +20,27 @@
             <tbody>
               <tr *ngFor="let invoiceItem of listOfInvoice; let itemIndex = index;">
                 <td  data-title="Invoices">
-                  <input value="{{itemIndex + 1}}" [disabled]="true" class="form-control">
+
+                  <input value="{{invoiceItem.invoices}}" [disabled]="isFormDisabled" class="form-control">
                 </td>
                 <td  data-title="Date">
-                  <input value="{{itemIndex + 1}}" [disabled]="true" class="form-control">
+                  <input value="{{invoiceItem.date}}" [disabled]="isFormDisabled" class="form-control">
                 </td>
                 <td  data-title="Amount">
-                  <input value="{{itemIndex + 1}}" [disabled]="true" class="form-control">
+                  <input value="{{invoiceItem.amount}}" [disabled]="isFormDisabled" class="form-control">
                 </td>
                 <td data-title="Customer">
-                  <input value="{{itemIndex + 1}}" [disabled]="true" class="form-control">
+                  <input value="{{invoiceItem.customerName}}" [disabled]="isFormDisabled" class="form-control">
+
                 </td>
                 <td data-title="Action">
                <!-- edit and delete button -->
-                  
-                    <div class="outbox px-3">
-                      
-                        <i class="bi bi-pencil text-success px-2" style="cursor: pointer;"></i> 
-                      <!-- <button class="btn"> -->
-                        <i class="bi bi-trash text-danger px-2"  style="cursor: pointer;"></i> 
-                      <!-- </button>/ -->
+
+               <div class="d-flex justyfy-content-space-around align-item-center mt-1">
+                                         
+                <i class="bi bi-pencil text-success px-4"  (click)="toDisableinput(itemIndex)"></i>
+                
+                <i class="bi bi-trash text-danger hyper-link"></i>
                   
                   </div>
                 </td>
