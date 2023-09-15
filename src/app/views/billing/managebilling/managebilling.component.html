@@ -1,21 +1,24 @@
 <app-main-nav-tab></app-main-nav-tab>
 <div class="container-fluid">
   <div class="row flex-nowrap">
-    <div class="col-auto px-0">
-      <app-leftpanel></app-leftpanel>
-    </div>
+
     <main class="col ps-md-2 pt-2">
 
       <div class="container-fluid h-lg-100">
         <div class="row justify-content-center h-lg-100">
           <div class="col-lg-12">
-            <div class="row" style="height:20vh;">
+
+            <div class="col-auto px-0">
+              <app-leftpanel></app-leftpanel>
+            </div>
+
+            <div class="row" style="height:15vh;">
               <div class="row col-sm-12 col-lg-12">
                 <div class="col-lg-4">
                   <label for="exampleInputEmail1 validationCustom01" class="form-label hidelbl">Invoice No</label>
                   <input type="text" [formControl]="invoiceNo" max="10" maxlength="10" placeholder="Invoice No"
                     class=" form-control ng-pristine ng-valid ng-touched {{invoiceNo.hasError('required') && invoiceNo.touched || isError ?'is-invalid':''}} "
-                    id="invoiceNo validationCustom01" name="InvoiceNo" [OnlyNumber]=true max="10" maxlength="10">
+                    id="invoiceNo validationCustom01" name="InvoiceNo" [OnlyNumber]=true max="10" maxlength="10"  [(ngModel)]='invoice.id'>
                   <div class="invalid-feedback">
                     Please enter invoice number
                   </div>
@@ -25,7 +28,7 @@
                   <label for="exampleInputEmail1" class="form-label hidelbl"> Name</label>
                   <input type="text" max="10" [formControl]="name" maxlength="10" placeholder="Customer Name"
                     class="form-control ng-pristine ng-valid ng-touched {{name.hasError('required') && name.touched || isError ?'is-invalid':''}}"
-                    id="name" name="Name" >
+                    id="name" name="Name"  [(ngModel)]='invoice.name'>
                   <div class="invalid-feedback">
                     Please enter custmer name
                   </div>
@@ -46,7 +49,7 @@
           <div class="col-lg-12">
             <div class="h-lg-100 d-flex flex-column">
               <div class="row justify-content-center bg-purple">
-                <div #invoiceContent style="height:60vh;overflow:auto;">
+                <div #invoiceContent style="height:50vh;overflow:auto;">
                   <label for="exampleInputEmail1" class="form-label">Invoice Items</label>
                   <table class="table">
                     <thead>
@@ -100,10 +103,10 @@
                             [disabled]="true" class="form-control ng-pristine ng-valid ng-touched">
                         </td>
                         <td>
-                          <div class="d-flex  justify-content-around align-item-center mt-2 ">
+                          <div class="d-flex  justify-content-around align-item-center mt-1 ">
                             <i class="bi bi-trash  text-danger" (click)="onInvoiceItemDelete(itemIndex)"
                               style="cursor:pointer"></i>
-                            <i class="bi bi-pencil text-success" style="cursor:pointer"></i>
+                            <!--<i class="bi bi-pencil text-success" style="cursor:pointer"></i> -->
                           </div>
                         </td>
                       </tr>

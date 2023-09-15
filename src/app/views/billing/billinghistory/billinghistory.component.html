@@ -12,7 +12,7 @@
                 <!-- table head -->
                 <th scope="col">Invoices</th>
                 <th scope="col">Date</th>
-                <th scope="col">Amount</th> 
+                <th scope="col">Amount</th>
                 <th scope="col">Customer</th>
                 <th scope="col">Actions</th>
               </tr>
@@ -20,34 +20,29 @@
             <tbody>
               <tr *ngFor="let invoiceItem of listOfInvoice; let itemIndex = index;">
                 <td  data-title="Invoices">
-
-                  <input value="{{invoiceItem.invoices}}" name="name"  [disabled]="isFormDisabled" class="form-control">
+                  <input value="{{invoiceItem.id}}" name="name"  [disabled]="isFormDisabled" class="form-control">
                 </td>
                 <td  data-title="Date">
                   <input value="{{invoiceItem.date}}" [disabled]="isFormDisabled" class="form-control">
                 </td>
                 <td  data-title="Amount">
-                  <input value="{{invoiceItem.amount}}" [disabled]="isFormDisabled" class="form-control">
+                  <input value="{{invoiceItem.totalPrice}}" [disabled]="isFormDisabled" class="form-control">
                 </td>
                 <td data-title="Customer">
-                  <input value="{{invoiceItem.customerName}}" [disabled]="isFormDisabled" class="form-control">
-
+                  <input value="{{invoiceItem.name}}" [disabled]="isFormDisabled" class="form-control">
                 </td>
                 <td data-title="Action">
                <!-- edit and delete button -->
 
-               <div class="d-flex justyfy-content-space-around     align-item-center mt-1">
-                                         
-                <i class="bi bi-pencil text-success px-4" (click)="getRoutValue()" style="cursor: pointer;"></i>
-                
-                <i class="bi bi-trash   text-danger hyper-link" (click)="delete(itemIndex)" style="cursor:pointer"></i>
-                  
+                  <div class="d-flex justyfy-content-space-around  align-item-center mt-1">
+                      <i class="bi bi-pencil text-success px-4" (click)="onEdit(itemIndex)" style="cursor: pointer;"></i>
+                      <i class="bi bi-trash   text-danger hyper-link" (click)="onDelete(itemIndex)" style="cursor:pointer"></i>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
           </div>
-        </main> 
+        </main>
     </div>
 </div>

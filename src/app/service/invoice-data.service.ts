@@ -8,10 +8,35 @@ import { LocalService } from './local.service';
 export class InvoiceDataService {
 
   private storageKey = "Invoices";
+  private activeStorageKey = "activeInvoice";
+
   private invoiceList: Array<Invoice> = [];
+  private activeInvoice : Invoice = null;
 
   constructor(private localStorageService: LocalService) {
      this.stuffLocalArray();
+  }
+
+  setActiveInvoice(invoice) {
+     this.activeInvoice = invoice;
+     if(this.activeInvoice != null) {
+       var jSOnArray = JSON.stringify(this.activeInvoice);
+       this.localStorageService.saveData(this.activeStorageKey, jSOnArray);
+     }
+     else {
+       this.localStorageService.removeData(this.activeStorageKey);
+     }
+  }
+
+  getActiveInvoice() {
+
+      let invoiceJson  = this.localStorageService.getData(this.activeStorageKey);
+      this.activeInvoice = JSON.parse(invoiceJson); // string to "any" object first
+
+      if(this.activeInvoice != null) {
+        return this.activeInvoice; //old invoice to edit
+      }
+      return new Invoice(); //fresh invoice
   }
 
   getAll() {
@@ -36,7 +61,19 @@ export class InvoiceDataService {
        this.invoiceList[index] = invoice;
     }
     this.saveToLoacalStorage();
+    this.stuffLocalArray();
+    return this.getAll();
   }
+
+  delete(index) {
+    if(this.invoiceList.length > index) {
+       this.invoiceList.splice(index, 1)
+    }
+    this.saveToLoacalStorage();
+    this.stuffLocalArray();
+    return this.getAll();
+  }
+
 
   stuffLocalArray() {
     let invoiceJson  = this.localStorageService.getData(this.storageKey);
