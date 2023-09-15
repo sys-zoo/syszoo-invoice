@@ -2,7 +2,8 @@ import { InvoiceItem } from 'src/app/model/response/invoice-item';
 export class Invoice {
     id?:String;
     name?:String;
-    date?:number = null;
+    date?:String;
+    mobile?:String;
     totalPrice?:number = null;
     items?: Array<InvoiceItem> = null;
 

@@ -74,6 +74,10 @@ export class InvoiceDataService {
     return this.getAll();
   }
 
+  removeActiveStorage() {
+    this.localStorageService.removeData(this.activeStorageKey)
+  }
+
 
   stuffLocalArray() {
     let invoiceJson  = this.localStorageService.getData(this.storageKey);

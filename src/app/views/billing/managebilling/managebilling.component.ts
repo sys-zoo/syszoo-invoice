@@ -5,7 +5,7 @@ import { Customer } from 'src/app/model/response/Customer';
 import { InvoiceDataService } from 'src/app/service/invoice-data.service';
 import { Router } from "@angular/router";
 import { Invoice } from 'src/app/model/response/invoice';
-
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -54,7 +54,7 @@ export class ManagebillingComponent implements OnInit {
     this.listOfProducIds = this.productIds;
 
     this.invoice  = this.invoiceDataService.getActiveInvoice();
-    if(this.invoice.items != null) {
+    if(this.invoice.items != null && this.invoice.totalPrice !== null && this.invoice.quantity !== null) {
       this.listOfInvoiceItem = this.invoice.items;
     }
     this.totalAmount = this.invoice.totalPrice;
@@ -81,7 +81,7 @@ export class ManagebillingComponent implements OnInit {
 
   onInvoiceItemDelete(index) {
     if (index < this.listOfInvoiceItem.length) {
-      this.listOfInvoiceItem.splice(index, 1);
+      this.listOfInvoiceItem.splice(index, this.listOfInvoiceItem.length);
     }
     this.getInvoiceTotal();
   }
@@ -104,31 +104,39 @@ export class ManagebillingComponent implements OnInit {
 
   onSaveInvoices() {
 
-
     console.log("onSaveInvoices called");
+    this.invoiceDataService.removeActiveStorage();
     /*var invoiceData = {
       date: this.date,
       customerName: this.name.value,
       invoices: this.invoiceNo.value,
       amount: this.totalAmount,
     };*/
-    this.invoice.items = this.listOfInvoiceItem;
-    this.invoice.totalPrice = this.totalAmount;
-    this.invoiceDataService.add(this.invoice);
-    alert("Invoice saved successfully");
-    this.router.navigate(['/billing-history']);
-
-    /*if (this.listOfInvoiceItem[0].price !== null &&
-       this.listOfInvoiceItem[0].quantity !== null &&
-       this.listOfInvoiceItem[0].id !== null &&
-       this.listOfInvoiceItem
-       && this.totalAmount !== 0 && this.mobileNo.valid && this.name.valid && this.invoiceNo.valid) {
-
+    if (this.listOfInvoiceItem[0].price !== null &&
+       this.listOfInvoiceItem[0].quantity !== null && this.mobileNo.valid && this.name.valid && this.invoiceNo.valid) {
+        this.invoice.items = this.listOfInvoiceItem;
+        this.invoice.totalPrice = this.totalAmount;
+        this.invoice.date = this.date;
+        this.invoiceDataService.add(this.invoice);
+        Swal.fire({
+          title: 'Successful',
+          text: 'Invoices added successfully',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        })
+        // alert("Invoice saved successfully");
+        this.router.navigate(['/billing-history']);
 
     } else {
       this.isError = true;
-      alert("Please fill all the fields");
-    }*/
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please Enter Invoice details',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+      setInterval(() => {this.isError = false;}, 10000)
+    }
   }
   onPrintAndSaveInvoice() {
     this.onSaveInvoices();
