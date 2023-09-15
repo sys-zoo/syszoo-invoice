@@ -39,14 +39,21 @@ export class ManagebillingComponent implements OnInit {
   CurrentDate = new Date();
   date = this.CurrentDate.getDate() + "/" + this.CurrentDate.getMonth() + "/" + this.CurrentDate.getFullYear();
   invoice : Invoice = null;
+  btn:string;
 
   constructor(public router: Router, private invoiceDataService: InvoiceDataService) {
+    if(sessionStorage.length>0){
+      this.btn = "Update";
+    }else{
+      this.btn = "Save";
+    }
     console.log(this.date);
   }
 
   ngOnInit() {
     // this.onSaveInvoices();
     this.setOptions();
+    
   }
 
   setOptions() {
@@ -117,6 +124,16 @@ export class ManagebillingComponent implements OnInit {
         this.invoice.items = this.listOfInvoiceItem;
         this.invoice.totalPrice = this.totalAmount;
         this.invoice.date = this.date;
+        if(sessionStorage.length > 0){
+          this.invoiceDataService.update(this.invoice,sessionStorage.getItem("index"));
+          sessionStorage.clear();
+          Swal.fire({
+            title: 'Successful',
+            text: 'Invoices history updated',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          })
+        }else{
         this.invoiceDataService.add(this.invoice);
         Swal.fire({
           title: 'Successful',
@@ -124,6 +141,7 @@ export class ManagebillingComponent implements OnInit {
           icon: 'success',
           confirmButtonText: 'Ok'
         })
+        }
         // alert("Invoice saved successfully");
         this.router.navigate(['/billing-history']);
 

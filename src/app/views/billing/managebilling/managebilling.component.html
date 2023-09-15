@@ -27,7 +27,7 @@
                 <div class="col-lg-4 col-md-6">
                   <label for="exampleInputEmail1" class="form-label hidelbl">
                     Name</label>
-                  <input type="text" max="10" [formControl]="name" maxlength="10" placeholder="Customer Name" class="form-control ng-pristine ng-valid ng-touched {{
+                  <input type="text" [formControl]="name"  placeholder="Customer Name" class="form-control ng-pristine ng-valid ng-touched {{
                       name.hasError('required') && isError ? 'is-invalid' : ''
                     }}" id="name" name="Name" [(ngModel)]="invoice.name" />
                   <div class="invalid-feedback">Please enter custmer name</div>
@@ -158,8 +158,8 @@
                   <div class="col"></div>
 
                   <div class="col">
-                    <button class="btn btn-primary w-100 rounded-2" (click)="onSaveInvoices()">
-                      Save
+                    <button class="btn btn-primary w-100 rounded-2" id="update" (click)="onSaveInvoices()">
+                      {{btn}}
                     </button>
                   </div>
 

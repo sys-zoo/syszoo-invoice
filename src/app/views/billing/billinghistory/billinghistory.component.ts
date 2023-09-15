@@ -49,6 +49,7 @@ export class BillinghistoryComponent {
       var invoice = this.listOfInvoice[index];
       this.invoiceDataService.setActiveInvoice(invoice);
       this.router.navigate(['/manage-billing']);
+      sessionStorage.setItem("index", index)
     }
     else {
       alert("No valid info found, Please create new one");
