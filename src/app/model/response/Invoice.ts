@@ -4,7 +4,7 @@ import { Customer } from 'src/app/model/response/Customer';
 export class Invoice {
     id?:String;
     customer?:Customer;
-    date?:number = null;
+    date?:String = null;
     totalPrice?:number = null;
     items?: Array<InvoiceItem> = null;
 

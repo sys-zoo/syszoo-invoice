@@ -79,7 +79,7 @@ export class InvoiceDataService {
   }
 
   removeActiveStorage() {
-    this.localStorageService.removeData(this.activeStorageKey)
+    this.localStorageService.removeData(this.ActiveInvoice_LSK)
   }
 
 

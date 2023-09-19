@@ -44,20 +44,16 @@ export class ManagebillingComponent implements OnInit {
   invoice : Invoice = null;
   btn:string;
 
-<<<<<<< Updated upstream
-  constructor(public router: Router, private invoiceDataService: InvoiceDataService) {
-    if(sessionStorage.length>0){
-      this.btn = "Update";
-    }else{
-      this.btn = "Save";
-    }
-=======
   constructor(public router: Router,
               private invoiceDataService: InvoiceDataService,
               private productDataService: ProductService) {
 
->>>>>>> Stashed changes
-    console.log(this.date);
+      if(sessionStorage.length>0){
+        this.btn = "Update";
+      }else{
+        this.btn = "Save";
+      }
+      console.log(this.date);
   }
 
   ngOnInit() {
