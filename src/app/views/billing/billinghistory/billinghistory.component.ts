@@ -3,6 +3,7 @@ import { InvoiceDataService } from 'src/app/service/invoice-data.service';
 import { Router } from '@angular/router';
 import { InvoiceItem } from 'src/app/model/response/invoice-item';
 import { Invoice } from 'src/app/model/response/invoice';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-billinghistory',
@@ -58,7 +59,24 @@ export class BillinghistoryComponent {
 
 
   onDelete(index){
-    this.listOfInvoice = this.invoiceDataService.delete(index);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.listOfInvoice = this.invoiceDataService.delete(index);
+        Swal.fire(
+          'Deleted!',
+          'the selected invoice was successfully deleted',
+          'success'
+        )
+      }
+    })
   }
 
   getRoutValue(){

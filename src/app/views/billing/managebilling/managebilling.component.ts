@@ -53,7 +53,6 @@ export class ManagebillingComponent implements OnInit {
   ngOnInit() {
     // this.onSaveInvoices();
     this.setOptions();
-    
   }
 
   setOptions() {
@@ -121,6 +120,7 @@ export class ManagebillingComponent implements OnInit {
     };*/
     if (this.listOfInvoiceItem[0].price !== null &&
        this.listOfInvoiceItem[0].quantity !== null && this.mobileNo.valid && this.name.valid && this.invoiceNo.valid) {
+        this.listOfInvoiceItem[this.listOfInvoiceItem.length-1] === null ? this.listOfInvoiceItem.pop() : this.listOfInvoiceItem
         this.invoice.items = this.listOfInvoiceItem;
         this.invoice.totalPrice = this.totalAmount;
         this.invoice.date = this.date;
