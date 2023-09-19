@@ -45,13 +45,13 @@
                         <th scope="col" style="width: 10%;">Date</th>
                         <th scope="col" style="width: 15%;">ProductID</th>
                         <th scope="col">Name</th>
-                        <th scope="col" style="width: 5%;">Quantity</th>
-                        <th scope="col" style="width: 10%;">Price</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" style="width: 12%;">Quantity</th>
+                        <th scope="col" style="width: 15%;">Price</th>
+                        <th scope="col" style="width: 10%;">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let productItem of listOfProductsItem; let itemIndex = index;">
+                      <tr *ngFor="let product of listOfProductsItem; let itemIndex = index;">
                         <th scope="row">
                           <input value="{{itemIndex + 1}}" (focus)="onItemFocus(itemIndex)" [disabled]="true"
                             class="form-control ng-pristine ng-valid ng-touched">
@@ -60,23 +60,23 @@
                           <input [(ngModel)]="date" (focus)="onItemFocus(itemIndex)" class="form-control ng-pristine ng-valid ng-touched">
                         </td>
                         <td>
-                          <input [(ngModel)]="productItem.id" (focus)="onItemFocus(itemIndex)" list="productIds"
+                          <input [(ngModel)]="product.id" (focus)="onItemFocus(itemIndex)" list="productIds"
                             class="{{validation? 'is-invalid': ' ' }} form-control ng-pristine ng-valid ng-touched">
                         </td>
                         <td>
-                          <input [(ngModel)]="productItem.name" (focus)="onItemFocus(itemIndex)" list="products"
+                          <input [(ngModel)]="product.name" (focus)="onItemFocus(itemIndex)" list="products"
                             class="{{validation? 'is-invalid': ' ' }} form-control ng-pristine ng-valid ng-touched">
                           <datalist id="products">
                             <option *ngFor="let opt of listOfProductsItem" [value]="opt">
                           </datalist>
                         </td>
                         <td>
-                          <input type="number" min="0" [(ngModel)]="productItem.quantity"
+                          <input type="number" min="0" [(ngModel)]="product.quantity"
                             (ngModelChange)="onItemSpecChange(itemIndex)" (focus)="onItemFocus(itemIndex)"
                             [OnlyNumber]=true class="{{validation? 'is-invalid': ' ' }} form-control ng-pristine ng-valid ng-touched">
                         </td>
                         <td>
-                          <input type="number" min="0" [(ngModel)]="productItem.price"
+                          <input type="number" min="0" [(ngModel)]="product.price"
                             (ngModelChange)="onItemSpecChange(itemIndex)" (focus)="onItemFocus(itemIndex)"
                             [OnlyNumber]=true class="{{validation? 'is-invalid': ' ' }} form-control ng-pristine ng-valid ng-touched">
                         </td>
@@ -113,11 +113,10 @@
                   </div>
 
                   <div class="row col-2">
-                    <button class="btn w-100 rounded-2" (click)="onSaveProductList()">
+                    <button class="btn btn-primary w-100 rounded-2" (click)="onSaveProductList()">
                       Save
                     </button>
                   </div>
-
                 </div>
 
               </div>

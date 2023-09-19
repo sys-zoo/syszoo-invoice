@@ -1,8 +1,8 @@
 import { Component, VERSION, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { InvoiceDataService } from 'src/app/service/invoice-data.service';
 import { Router } from '@angular/router';
-import { InvoiceItem } from 'src/app/model/response/invoice-item';
-import { Invoice } from 'src/app/model/response/invoice';
+import { InvoiceItem } from 'src/app/model/response/Invoice-item';
+import { Invoice } from 'src/app/model/response/Invoice';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -18,7 +18,7 @@ export class BillinghistoryComponent {
 
   constructor(private invoiceDataService: InvoiceDataService,private router:Router){
      this.listOfInvoice = this.invoiceDataService.getAll();
-     console.log("listOfInvoice " + this.listOfInvoice.length);
+     console.log("listOfInvoice " + this.listOfInvoice[1]._price);
   }
 
   ngOnInit() {

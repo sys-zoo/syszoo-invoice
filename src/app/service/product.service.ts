@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { LocalService } from './local.service';
-import { ProductItem } from '../model/response/product-item';
+import { Product } from '../model/response/product-item';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private storageKey = "product";
-  private productList: Array<ProductItem> = [];
+  private Products_LSK = "product";
+  private productList: Array<Product> = [];
 
   constructor(private localStorageService: LocalService) {
      this.stuffLocalArray();
@@ -36,24 +36,38 @@ export class ProductService {
        this.productList[index] = invoice;
     }
     this.saveToLoacalStorage();
+    this.stuffLocalArray();
+    return this.getAll();
   }
+
+  delete(index) {
+    if(this.productList.length > index) {
+       this.productList.splice(index, 1)
+    }
+    this.saveToLoacalStorage();
+    this.stuffLocalArray();
+    return this.getAll();
+  }
+
 
   removeData(){
     this.localStorageService.clearData()
   }
 
-
   stuffLocalArray() {
-    let invoiceJson  = this.localStorageService.getData(this.storageKey);
-    let jsonObj = JSON.parse(invoiceJson); // string to "any" object first
+    let jsonObj  = this.localStorageService.getData(this.Products_LSK);
     if(jsonObj != null) {
-      this.productList = jsonObj as  Array<ProductItem>;
+      this.productList = jsonObj as  Array<Product>;
     }
   }
 
+  save(productList) {
+    this.productList = productList;
+    this.saveToLoacalStorage();
+  }
+
   saveToLoacalStorage() {
-    var jSOnArray = JSON.stringify(this.productList);
-    this.localStorageService.saveData(this.storageKey, jSOnArray);
+    this.localStorageService.saveData(this.Products_LSK, this.productList);
   }
 
 }
