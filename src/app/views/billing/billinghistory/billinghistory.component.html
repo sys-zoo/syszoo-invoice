@@ -18,18 +18,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let invoiceItem of listOfInvoice; let itemIndex = index;">
+              <tr *ngFor="let invoice of listOfInvoice; let itemIndex = index;">
                 <td  data-title="Invoices">
-                  <input value="{{invoiceItem.id}}" name="name"  [disabled]="isFormDisabled" class="form-control">
+                  <input value="{{invoice.id}}" name="name"  [disabled]="isFormDisabled" class="form-control">
                 </td>
                 <td  data-title="Date">
-                  <input value="{{invoiceItem.date}}" [disabled]="isFormDisabled" class="form-control">
+                  <input value="{{invoice.date}}" [disabled]="isFormDisabled" class="form-control">
                 </td>
                 <td  data-title="Amount">
-                  <input value="{{invoiceItem.totalPrice}}" [disabled]="isFormDisabled" class="form-control">
+                  <input value="{{invoice.totalPrice}}" [disabled]="isFormDisabled" class="form-control">
                 </td>
                 <td data-title="Customer">
-                  <input value="{{invoiceItem.name}}" [disabled]="isFormDisabled" class="form-control">
+                  <input value="{{invoice.customer.name}}" [disabled]="isFormDisabled" class="form-control">
                 </td>
                 <td data-title="Action">
                <!-- edit and delete button -->

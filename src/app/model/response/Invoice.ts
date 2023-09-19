@@ -1,9 +1,10 @@
 import { InvoiceItem } from 'src/app/model/response/invoice-item';
+import { Customer } from 'src/app/model/response/Customer';
+
 export class Invoice {
     id?:String;
-    name?:String;
-    date?:String;
-    mobile?:String;
+    customer?:Customer;
+    date?:number = null;
     totalPrice?:number = null;
     items?: Array<InvoiceItem> = null;
 

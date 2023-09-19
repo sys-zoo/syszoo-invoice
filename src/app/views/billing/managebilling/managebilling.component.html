@@ -25,12 +25,13 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6">
-                  <label for="exampleInputEmail1" class="form-label hidelbl">
-                    Name</label>
-                  <input type="text" [formControl]="name"  placeholder="Customer Name" class="form-control ng-pristine ng-valid ng-touched {{
-                      name.hasError('required') && isError ? 'is-invalid' : ''
-                    }}" id="name" name="Name" [(ngModel)]="invoice.name" />
-                  <div class="invalid-feedback">Please enter custmer name</div>
+                  <label for="exampleInputEmail1" class="form-label hidelbl"> Name</label>
+                  <input type="text" max="10" [formControl]="name" maxlength="10" placeholder="Customer Name"
+                    class="form-control ng-pristine ng-valid ng-touched {{name.hasError('required') && name.touched || isError ?'is-invalid':''}}"
+                    id="name" name="Name"  [(ngModel)]='invoice.customer.name'>
+                  <div class="invalid-feedback">
+                    Please enter custmer name
+                  </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <label for="exampleInputEmail1" class="form-label hidelbl">Mobile No</label>
@@ -87,7 +88,7 @@
                           <input [(ngModel)]="invoiceItem.name" (focus)="onInvoiceItemFocus(itemIndex)" list="products"
                             class="form-control ng-pristine ng-valid ng-touched" />
                           <datalist id="products">
-                            <option *ngFor="let opt of listOfProducts" [value]="opt"></option>
+                            <option *ngFor="let product of listOfProducts" [value]="product.name">
                           </datalist>
                         </td>
                         <td>

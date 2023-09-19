@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
-
+import { JsonwrapperService } from './jsonwrapper.service';
 @Injectable({
   providedIn: 'root'
 })
 export class LocalService {
 
-  constructor() { }
+  constructor(private jsonwrapperService: JsonwrapperService) { }
 
-  public saveData(key: string, value: string) {
-    localStorage.setItem(key, value);
+  public saveData(key: string, value) {
+    var jsonString = this.jsonwrapperService.wrap(value);
+    localStorage.setItem(key, jsonString);
   }
 
   public getData(key: string) {
-    return localStorage.getItem(key)
+    var jsonString = localStorage.getItem(key);
+    var jsonObj = this.jsonwrapperService.unwrap(jsonString);
+    return jsonObj
   }
+
   public removeData(key: string) {
     localStorage.removeItem(key);
   }

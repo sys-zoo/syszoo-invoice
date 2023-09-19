@@ -5,7 +5,10 @@ import { Customer } from 'src/app/model/response/Customer';
 import { InvoiceDataService } from 'src/app/service/invoice-data.service';
 import { Router } from "@angular/router";
 import { Invoice } from 'src/app/model/response/invoice';
+
 import Swal from 'sweetalert2';
+import { Product } from 'src/app/model/response/product-item';
+import { ProductService } from 'src/app/service/product.service';
 
 
 @Component({
@@ -22,7 +25,7 @@ export class ManagebillingComponent implements OnInit {
 
   productIds = ["0001", "0002", "0003", "0004", "0005", "0006"]
   products = ["Internet Explorer", "Edge", "Firefox", "Chrome", "Opera", "Safari"]
-  listOfProducts = [""]
+  listOfProducts: Array<Product> = [];
   listOfProducIds = [""]
   listOfInvoiceItem: Array<InvoiceItem> = [];
   customerList: Array<Customer> = [];
@@ -41,23 +44,30 @@ export class ManagebillingComponent implements OnInit {
   invoice : Invoice = null;
   btn:string;
 
+<<<<<<< Updated upstream
   constructor(public router: Router, private invoiceDataService: InvoiceDataService) {
     if(sessionStorage.length>0){
       this.btn = "Update";
     }else{
       this.btn = "Save";
     }
+=======
+  constructor(public router: Router,
+              private invoiceDataService: InvoiceDataService,
+              private productDataService: ProductService) {
+
+>>>>>>> Stashed changes
     console.log(this.date);
   }
 
   ngOnInit() {
     // this.onSaveInvoices();
     this.setOptions();
-    
+
   }
 
   setOptions() {
-    this.listOfProducts = this.products;
+    this.listOfProducts = this.productDataService.getAll();
     this.listOfProducIds = this.productIds;
 
     this.invoice  = this.invoiceDataService.getActiveInvoice();
