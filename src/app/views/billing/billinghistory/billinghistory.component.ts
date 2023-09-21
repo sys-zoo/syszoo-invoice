@@ -18,7 +18,7 @@ export class BillinghistoryComponent {
 
   constructor(private invoiceDataService: InvoiceDataService,private router:Router){
      this.listOfInvoice = this.invoiceDataService.getAll();
-     console.log("listOfInvoice " + this.listOfInvoice[1]._price);
+     //console.log("listOfInvoice " + this.listOfInvoice[1]._price);
   }
 
   ngOnInit() {
