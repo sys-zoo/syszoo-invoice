@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  registerForm! :FormGroup
+  registerForm!:FormGroup
   title = 'Formvalidation';
   Submitted = false;
 
@@ -16,7 +16,7 @@ export class SignupComponent {
   ngOnInit() {
      
     this.registerForm = this. FormBuilder.group({
-      fullName:['',Validators.required]
+      Name:['',Validators.required]
       })
   }
 
