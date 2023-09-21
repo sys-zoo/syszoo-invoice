@@ -2,6 +2,8 @@ import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
+import { SocialAuthService } from "@abacritt/angularx-social-login";
+import { FacebookLoginProvider } from "@abacritt/angularx-social-login";
 
 @Component({
   selector: 'app-login',
@@ -13,12 +15,29 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   form!: FormGroup;
   submitted = false;
   isReadOnly = true;
+  user:any;
+  loggedIn: any;
 
-  constructor(public router: Router, private formBuilder: FormBuilder) {
+
+  constructor(public router: Router, private formBuilder: FormBuilder, private authService: SocialAuthService) {
 
   }
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
 
+  signOut(): void {
+    this.authService.signOut();
+  }
   ngOnInit(): void {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+      console.log(this.user);
+      if(this.loggedIn){
+        this.onSignIn();
+      }
+    });
     this.form = this.formBuilder.group(
       {
         userMail: ['',
@@ -44,7 +63,9 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-
+    if(this.loggedIn){
+      this.onSignIn();
+    }
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -63,5 +84,4 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.navigate(['/signup']);
   }
 
-  
 }
