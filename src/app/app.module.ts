@@ -25,7 +25,10 @@ import { BookinghistoryComponent } from './views/booking/bookinghistory/bookingh
 import { MainNavTabComponent } from './views/shared/main-nav-tab/main-nav-tab.component';
 import { LeftpanelComponent } from './views/shared/leftpanel/leftpanel.component';
 import { InvoiceDataService } from './service/invoice-data.service';
-import { ProductService } from './service/product.service'
+import { ProductService } from './service/product.service';
+import { ManageCustomerComponent } from './views/customer/manage-customer/manage-customer.component';
+import { BuisnessConfigurationComponent } from './views/settings/buisness-configuration/buisness-configuration.component';
+import { InventoryDashboardComponent } from './views/inventory/inventory-dashboard/inventory-dashboard.component'
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { ProductService } from './service/product.service'
     BillinghistoryComponent,
     BookinghistoryComponent,
     MainNavTabComponent,
-    LeftpanelComponent
+    LeftpanelComponent,
+    ManageCustomerComponent,
+    BuisnessConfigurationComponent,
+    InventoryDashboardComponent
   ],
   imports: [
     BrowserModule,

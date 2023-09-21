@@ -1,10 +1,14 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { InvoiceItem } from 'src/app/model/response/invoice-item';
+import { InvoiceItem } from 'src/app/model/response/Invoice-item';
 import { FormControl, Validators } from '@angular/forms';
 import { Customer } from 'src/app/model/response/Customer';
 import { InvoiceDataService } from 'src/app/service/invoice-data.service';
 import { Router } from "@angular/router";
+import { Invoice } from 'src/app/model/response/Invoice';
 
+import Swal from 'sweetalert2';
+import { Product } from 'src/app/model/response/product-item';
+import { ProductService } from 'src/app/service/product.service';
 
 
 @Component({
@@ -19,9 +23,7 @@ export class ManagebillingComponent implements OnInit {
   [x: string]: any;
   @ViewChild('invoiceContent') invoiceContent: ElementRef;
 
-  productIds = ["0001", "0002", "0003", "0004", "0005", "0006"]
-  products = ["Internet Explorer", "Edge", "Firefox", "Chrome", "Opera", "Safari"]
-  listOfProducts = [""]
+  listOfProducts: Array<Product> = [];
   listOfProducIds = [""]
   listOfInvoiceItem: Array<InvoiceItem> = [];
   customerList: Array<Customer> = [];
@@ -31,25 +33,39 @@ export class ManagebillingComponent implements OnInit {
   invoiceNo = new FormControl(null, Validators.required);
   mobileNo = new FormControl(null, Validators.required);
   name = new FormControl(null, Validators.required);
-  // date = new FormControl(null, Validators.required);
-  // productId = new FormControl(null, Validators.required);
-  // prodectName = new FormControl(this.listOfInvoiceItem[].prodects, Validators.required);
-  // price = new FormControl(Validators.required);
+
   CurrentDate = new Date();
   date = this.CurrentDate.getDate() + "/" + this.CurrentDate.getMonth() + "/" + this.CurrentDate.getFullYear();
+  invoice: Invoice = null;
+  btn: string;
 
-  constructor(public router: Router, private invoiceDataService: InvoiceDataService) {
+  constructor(public router: Router,
+    private invoiceDataService: InvoiceDataService,
+    private productDataService: ProductService) {
+
+    if (sessionStorage.length > 0) {
+      this.btn = "Update";
+    } else {
+      this.btn = "Save";
+    }
     console.log(this.date);
   }
 
   ngOnInit() {
     // this.onSaveInvoices();
     this.setOptions();
+
   }
 
   setOptions() {
-    this.listOfProducts = this.products;
-    this.listOfProducIds = this.productIds;
+    this.listOfProducts = this.productDataService.getAll();
+    // this.listOfProducIds = this.productIds;
+
+    this.invoice = this.invoiceDataService.getActiveInvoice();
+    if (this.invoice.items != null && this.invoice.totalPrice !== null && this.invoice.quantity !== null) {
+      this.listOfInvoiceItem = this.invoice.items;
+    }
+    this.totalAmount = this.invoice.totalPrice;
     this.addInvoiceItem();
   }
 
@@ -58,6 +74,18 @@ export class ManagebillingComponent implements OnInit {
     if (focusedRow == this.listOfInvoiceItem.length - 1) //last row
     {
       this.addInvoiceItem();
+    }
+    // this.onProductInInventory(focusedRow);
+  }
+
+  onProductInInventory(index) {
+    for (var product of this.listOfProducts) {
+      if (this.listOfInvoiceItem[index].id === product.id) {
+        this.listOfInvoiceItem[index].name = this.listOfProducts[this.listOfProducts.indexOf(product)].name;
+        this.listOfInvoiceItem[index].price = this.listOfProducts[this.listOfProducts.indexOf(product)].price;
+        this.listOfInvoiceItem[index].quantity = 1;
+        this.onItemSpecChange(index)
+      }
     }
   }
 
@@ -73,7 +101,7 @@ export class ManagebillingComponent implements OnInit {
 
   onInvoiceItemDelete(index) {
     if (index < this.listOfInvoiceItem.length) {
-      this.listOfInvoiceItem.splice(index, 1);
+      this.listOfInvoiceItem.splice(index, this.listOfInvoiceItem.length);
     }
     this.getInvoiceTotal();
   }
@@ -96,21 +124,48 @@ export class ManagebillingComponent implements OnInit {
 
   onSaveInvoices() {
 
-    if (this.listOfInvoiceItem[0].price !== null && this.listOfInvoiceItem[0].quantity !== null && this.listOfInvoiceItem[0].id !== null && this.listOfInvoiceItem && this.totalAmount !== 0 && this.mobileNo.valid && this.name.valid && this.invoiceNo.valid) {
-      console.log("onSaveInvoices called");
-      var invoiceData = {
-        date: this.date,
-        customerName: this.name.value,
-        invoices: this.invoiceNo.value,
-        amount: this.totalAmount,
-      };
+    console.log("onSaveInvoices called");
+    this.invoiceDataService.removeActiveStorage();
 
-      this.invoiceDataService.add(invoiceData);
-      alert("Invoice saved successfully");
+    if (this.listOfInvoiceItem[0].price !== null &&
+      this.listOfInvoiceItem[0].quantity !== null &&
+      this.mobileNo.valid &&
+      this.name.valid &&
+      this.invoiceNo.valid) {
+      this.listOfInvoiceItem[this.listOfInvoiceItem.length - 1].price === null ? this.listOfInvoiceItem.pop() : this.listOfInvoiceItem
+      this.invoice.items = this.listOfInvoiceItem;
+      this.invoice.totalPrice = this.totalAmount;
+      this.invoice.date = this.date;
+      if (sessionStorage.length > 0) {
+        this.invoiceDataService.update(this.invoice, sessionStorage.getItem("index"));
+        sessionStorage.clear();
+        Swal.fire({
+          title: 'Successful',
+          text: 'Invoices history updated',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        })
+      } else {
+        this.invoiceDataService.add(this.invoice);
+        Swal.fire({
+          title: 'Successful',
+          text: 'Invoices added successfully',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        })
+      }
+      // alert("Invoice saved successfully");
       this.router.navigate(['/billing-history']);
+
     } else {
       this.isError = true;
-      alert("Please fill all the fields");
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please Enter Invoice details',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+      setInterval(() => { this.isError = false; }, 10000)
     }
   }
   onPrintAndSaveInvoice() {

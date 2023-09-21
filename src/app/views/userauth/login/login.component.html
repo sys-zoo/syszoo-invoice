@@ -5,8 +5,13 @@
         <div class="">
           <div class="card-body p-md-5">
             <div class="row justify-content-center">
+<<<<<<< HEAD
               <div class="col-md-10 col-lg-6 col-xl-4 order-2 order-lg-1">
                 
+=======
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+>>>>>>> 2e7700648934a35a19fc8328c8058b6c13a93489
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
                 <form>
                   <div class="mb-8">
@@ -22,19 +27,23 @@
                   </div>
                   <br>
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="button" class="btn btn-primary btn-lg">Login</button>
+                    <button class="button" type="submit" class="btn btn-primary btn-lg" (click)="onSignIn()">Login</button>
                   </div>
                   <div class="d-flex align-items-center justify-content-center">
                     <p class="fs-4 mb-0 fw-bold">New User?</p>
-                    <a class="text-primary fw-bold ms-2 hyper-link">Sign Up</a>
+                    <a class="text-primary fw-bold ms-2 hyper-link" (click)="onDoYouHaveAccount()">Sign Up</a>
                   </div>
                 </form>
               </div>
+            <div class="separator my-1">or</div>
+            <div class="d-grid gap-2 my-1">
+              <button class="btn btn-outline-dark  border-secondary rounded-1 my-1" type="submit"><img width="20" height="20" class="p-0" src="../../../../assets/img/icons8-google-48.png" alt="google-logo"/><span class="mx-1 ">Signin with google</span></button>
+              <button class="btn btn-outline-dark  border-secondary rounded-1 my-1" type="submit"><img width="20" height="20" class="p-0" src="../../../../assets/img/facebooklogo.png" alt="facebook-logo"/><span class="mx-1 ">Signin with facebook</span></button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  
+    </div>
+  </section>

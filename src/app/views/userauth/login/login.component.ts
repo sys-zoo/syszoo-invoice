@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.form = this.formBuilder.group(
       {
         userMail: ['',
@@ -35,17 +34,17 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
           ]]
       }
     );
-
     setTimeout(() => {
       this.isReadOnly = false;
     }, 2000);
-
   }
 
   ngOnDestroy() {
+
   }
 
   ngAfterViewInit() {
+
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -63,4 +62,6 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   onDoYouHaveAccount(): void {
     this.router.navigate(['/signup']);
   }
+
+  
 }

@@ -1,13 +1,13 @@
-import { Component, VERSION, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { Product } from 'src/app/model/response/product-item';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
-  selector: 'app-manageinventory',
-  templateUrl: './manageinventory.component.html',
-  styleUrls: ['./manageinventory.component.css']
+  selector: 'app-manage-customer',
+  templateUrl: './manage-customer.component.html',
+  styleUrls: ['./manage-customer.component.css']
 })
-export class ManageinventoryComponent implements OnInit {
+export class ManageCustomerComponent {
 
   datas:any;
   currentDate = new Date;
