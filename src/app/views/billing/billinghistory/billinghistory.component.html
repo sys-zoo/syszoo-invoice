@@ -1,0 +1,48 @@
+<app-main-nav-tab></app-main-nav-tab>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto px-0">
+            <app-leftpanel></app-leftpanel>
+        </div>
+        <main class="col ps-md-2 pt-2">
+          <div id="no-more-tables">
+          <table class="table">
+            <thead>
+              <tr>
+                <!-- table head -->
+                <th scope="col">Invoices</th>
+                <th scope="col">Date</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let invoice of listOfInvoice; let itemIndex = index;">
+                <td  data-title="Invoices">
+                  <input value="{{invoice.id}}"  [disabled]="true" name="name" class="form-control">
+                </td>
+                <td  data-title="Date">
+                  <input value="{{invoice.date}}"  [disabled]="true" class="form-control">
+                </td>
+                <td  data-title="Amount">
+                  <input value="{{invoice.totalPrice}}"  [disabled]="true" class="form-control">
+                </td>
+                <td data-title="Customer">
+                  <input value="{{invoice.customer.name}}" [disabled]="true" class="form-control">
+                </td>
+                <td data-title="Action">
+               <!-- edit and delete button -->
+
+                  <div class="d-flex justyfy-content-space-around  align-item-center mt-1">
+                      <i class="bi bi-pencil text-success px-4" (click)="onEdit(itemIndex)" style="cursor: pointer;"></i>
+                      <i class="bi bi-trash   text-danger hyper-link" (click)="onDelete(itemIndex)" style="cursor:pointer"></i>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </main>
+    </div>
+</div>

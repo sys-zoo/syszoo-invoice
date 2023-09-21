@@ -1,0 +1,69 @@
+<div id="sidebar" class="collapse collapse-horizontal border-end">
+    <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100" style="width:250px;">
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-sm-start" id="menu" style="margin-left:25px;">
+          <li class="nav-item">
+              <a href="home" class="nav-link align-middle px-0">
+                  <i class="fs-4 bi-house"></i> <span class="ms-1 d-sm-inline">Home</span>
+              </a>
+          </li>
+          <li>
+              <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                  <i class="fs-4 bi-speedometer2"></i>
+                  <span class="ms-1 d-sm-inline">Billing</span>
+              </a>
+              <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                  <li class="w-100">
+                      <a routerLink="/manage-billing" class="nav-link px-0"> <span class=" d-sm-inline">New Bill</span> </a>
+                  </li>
+                  <li>
+                      <a routerLink="/billing-history" class="nav-link px-0"> <span class=" d-sm-inline">History</span>  </a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                  <i class="fs-4 bi-speedometer2"></i> <span class="ms-1  d-sm-inline">Booking</span> </a>
+              <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                  <li class="w-100">
+                      <a routerLink="/booking-dashboard" class="nav-link px-0"> <span class=" d-sm-inline">New Book</span> </a>
+                  </li>
+                  <li>
+                      <a routerLink="/booking-history" class="nav-link px-0"> <span class=" d-sm-inline">History</span>  </a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                  <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-sm-inline">Inventory</span> </a>
+              <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                  <li class="w-100">
+                      <a routerLink="/inventory-dashboard" class="nav-link px-0"> <span class=" d-sm-inline">Inventory Dashboard</span>  </a>
+                  </li>
+                  <li class="w-100">
+                      <a routerLink="/manage-inventory" class="nav-link px-0"> <span class=" d-sm-inline">Manage Inventory</span>  </a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                  <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-sm-inline">Customers</span> </a>
+              <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
+                  <li class="w-100">
+                      <a routerLink="/manage-customer" class="nav-link px-0"> <span class=" d-sm-inline">Manage Customers</span>  </a>
+                  </li>
+
+              </ul>
+          </li>
+          <li>
+              <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                  <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-sm-inline">Settings</span> </a>
+              <ul class="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
+                  <li class="w-100">
+                      <a routerLink="/buisness-configuration" class="nav-link px-0"> <span class=" d-sm-inline">Buisness Configuration</span>  </a>
+                  </li>
+
+              </ul>
+          </li>
+        </ul>
+      </div>
+</div>

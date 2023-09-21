@@ -1,0 +1,58 @@
+ .google-sign-in {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .google-sign-in:hover {
+    background-color: #357ae8;
+  }
+
+  .material-icons {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+
+  /* 'or' and the 'harizondal' line css */
+
+  .separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  .separator::before,
+  .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+  }
+  .separator:not(:empty)::before {
+    margin-right: .25em;
+  }
+  .separator:not(:empty)::after {
+    margin-left: .25em;
+  }
+
+  /* facebook and google logo control */
+
+  .p-0{
+    margin-right: 5px;
+    margin-bottom: 4px;
+  }
+
+  /* .google-icon{
+    height: 40px;
+    width: 40px;
+  }
+  .btn{
+    height: auto;
+    width: 100%;
+    justify-content: space-between;
+  } */

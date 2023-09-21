@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Badminweb</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script type="text/javascript" src="cordova.js"></script>
+</head>
+<body>
+  <app-root></app-root>
+</body>
+<script src="../assets/libs/jquery/jquery.min.js"></script>
+<script src="../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
+
+var db = null;
+function onDeviceReady() {
+    console.log("onDeviceReady caled");
+    console.log(device);
+    console.log(device.cordova);
+
+     db = window.sqlitePlugin.openDatabase({
+       name: 'my.db',
+       location: 'default',
+     });
+
+     db.transaction(function(tx) {
+        tx.executeSql('CREATE TABLE IF NOT EXISTS DemoTable (name, score)');
+        tx.executeSql('INSERT INTO DemoTable VALUES (?,?)', ['Alice', 101]);
+        tx.executeSql('INSERT INTO DemoTable VALUES (?,?)', ['Betty', 202]);
+     }, function(error) {
+        console.log('Transaction ERROR: ' + error.message);
+     }, function() {
+        console.log('Populated database OK');
+     });
+
+     db.executeSql('SELECT count(*) AS mycount FROM DemoTable', [], function(rs) {
+       console.log('Record count (expected to be 2): ' + rs.rows.item(0).mycount);
+     }, function(error) {
+       console.log('SELECT SQL statement ERROR: ' + error.message);
+     });
+}
+
+function init() {
+    // Put your code here
+    console.log("init caled");
+   document.addEventListener("deviceready", onDeviceReady, false);
+
+}
+window.onload = init;
+
+function testfunction() {
+   console.log("testfunction called");
+}
+
+</script>
+</html>
