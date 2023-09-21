@@ -23,7 +23,7 @@ import { BuisnessConfigurationComponent } from './views/settings/buisness-config
 
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: '', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-password', component: ForgotpasswordComponent },
   { path: 'home', component: HomeComponent },
