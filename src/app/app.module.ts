@@ -35,6 +35,8 @@ import {
   FacebookLoginProvider,GoogleSigninButtonDirective,
 } from '@abacritt/angularx-social-login';
 
+import { ManageLocationComponent } from './views/inventory/manage-location/manage-location.component';
+import { ManageBatchesComponent } from './views/inventory/manage-batches/manage-batches.component'
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import {
     LeftpanelComponent,
     ManageCustomerComponent,
     BuisnessConfigurationComponent,
-    InventoryDashboardComponent
+    InventoryDashboardComponent,
+    ManageLocationComponent,
+    ManageBatchesComponent
   ],
   imports: [
     BrowserModule,
