@@ -36,7 +36,8 @@ import {
 } from '@abacritt/angularx-social-login';
 
 import { ManageLocationComponent } from './views/inventory/manage-location/manage-location.component';
-import { ManageBatchesComponent } from './views/inventory/manage-batches/manage-batches.component'
+import { ManageBatchesComponent } from './views/inventory/manage-batches/manage-batches.component';
+import { ManageTaxComponent } from './views/inventory/manage-tax/manage-tax.component'
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ManageBatchesComponent } from './views/inventory/manage-batches/manage-
     BuisnessConfigurationComponent,
     InventoryDashboardComponent,
     ManageLocationComponent,
-    ManageBatchesComponent
+    ManageBatchesComponent,
+    ManageTaxComponent
   ],
   imports: [
     BrowserModule,

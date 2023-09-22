@@ -10,6 +10,7 @@ import { ManageinventoryComponent } from './views/inventory/manageinventory/mana
 import { InventoryDashboardComponent } from './views/inventory/inventory-dashboard/inventory-dashboard.component'
 import { ManageLocationComponent } from './views/inventory/manage-location/manage-location.component';
 import { ManageBatchesComponent } from './views/inventory/manage-batches/manage-batches.component'
+import { ManageTaxComponent } from './views/inventory/manage-tax/manage-tax.component'
 
 import { ManagebillingComponent } from './views/billing/managebilling/managebilling.component';
 import { BillinghistoryComponent } from './views/billing/billinghistory/billinghistory.component';
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'manage-inventory', component: ManageinventoryComponent },
   { path: 'manage-location', component: ManageLocationComponent },
   { path: 'manage-batches', component: ManageBatchesComponent },
+  { path: 'manage-tax', component: ManageTaxComponent },
   { path: 'inventory-dashboard', component: InventoryDashboardComponent },
   { path: 'manage-customer', component: ManageCustomerComponent },
   { path: 'buisness-configuration', component: BuisnessConfigurationComponent },
