@@ -5,42 +5,41 @@ import { LocalService } from './local.service';
 @Injectable({
   providedIn: 'root'
 })
-export class InventoryBatchService {
+export class TaxService {
 
   private TAX_LSK = "Tax";
 
-  private inventoryBatchList: Array<Tax
-  InventoryBatch> = [];
+  private inventoryTaxList: Array<Tax> = [];
 
   constructor(private localStorageService: LocalService) {
      this.stuffLocalArray();
   }
 
-  createNewBatch() {
-      var newBatch = new InventoryBatch(); //fresh invoice
-      return newBatch;
-  }
+  // createNewBatch() {
+  //     var newBatch = new InventoryBatch(); //fresh invoice
+  //     return newBatch;
+  // }
 
   getAll() {
-    return this.inventoryBatchList;
+    return this.inventoryTaxList;
   }
 
   getAt(index) {
-    if(this.inventoryBatchList.length > index) {
-       return this.inventoryBatchList[index];
+    if(this.inventoryTaxList.length > index) {
+       return this.inventoryTaxList[index];
     }
     return null;
   }
 
   add(location) {
-    this.inventoryBatchList.push(location);
-    console.log("InvoiceService add " + this.inventoryBatchList.length);
+    this.inventoryTaxList.push(location);
+    console.log("InvoiceService add " + this.inventoryTaxList.length);
     this.saveToLoacalStorage();
   }
 
   update(location, index) {
-    if(this.inventoryBatchList.length > index) {
-       this.inventoryBatchList[index] = location;
+    if(this.inventoryTaxList.length > index) {
+       this.inventoryTaxList[index] = location;
     }
     this.saveToLoacalStorage();
     this.stuffLocalArray();
@@ -48,8 +47,8 @@ export class InventoryBatchService {
   }
 
   delete(index) {
-    if(this.inventoryBatchList.length > index) {
-       this.inventoryBatchList.splice(index, 1)
+    if(this.inventoryTaxList.length > index) {
+       this.inventoryTaxList.splice(index, 1)
     }
     this.saveToLoacalStorage();
     this.stuffLocalArray();
@@ -59,17 +58,17 @@ export class InventoryBatchService {
   stuffLocalArray() {
     let jsonObj  = this.localStorageService.getData(this.TAX_LSK);
     if(jsonObj != null) {
-      this.inventoryBatchList = jsonObj as  Array<InventoryBatch>;
+      this.inventoryTaxList = jsonObj as  Array<Tax>;
     }
   }
 
   save(inventoryBatchList) {
-    this.inventoryBatchList = inventoryBatchList;
+    this.inventoryTaxList = inventoryBatchList;
     this.saveToLoacalStorage();
   }
 
   saveToLoacalStorage() {
-    this.localStorageService.saveData(this.TAX_LSK, this.inventoryBatchList);
+    this.localStorageService.saveData(this.TAX_LSK, this.inventoryTaxList);
   }
 
 }
