@@ -1,13 +1,17 @@
-<app-main-nav-tab>
-
-</app-main-nav-tab>
+<app-main-nav-tab> </app-main-nav-tab>
 <div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-auto px-0">
-            <app-leftpanel></app-leftpanel>
-        </div>
-        <main class="col ps-md-2 pt-2">
-
-        </main>
+  <div class="row flex-nowrap">
+    <div class="col-auto px-0">
+      <app-leftpanel></app-leftpanel>
     </div>
+    <main class="col ps-md-2 pt-2">
+      <div *ngIf="user!==null">
+        <img src="{{ user.photoUrl }}" referrerpolicy="no-referrer" />
+        <div>
+          <h4>{{ user.name }}</h4>
+          <p>{{ user.email }}</p>
+        </div>
+      </div>
+    </main>
+  </div>
 </div>

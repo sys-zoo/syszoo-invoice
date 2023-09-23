@@ -1,4 +1,8 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { SocialAuthService } from "@abacritt/angularx-social-login";
+
+
 import { Router } from "@angular/router";
 
 @Component({
@@ -9,11 +13,18 @@ import { Router } from "@angular/router";
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy  {
   opened: boolean;
-  constructor(public router: Router) {
+  user: any = null;
+  constructor(public router: Router, private authService: SocialAuthService) {
 
   }
 
   ngOnInit(): void {
+    // if(this.user == null) {
+    //   this.router.navigate(['/']);
+    // }
+    this.authService.authState.subscribe((state)=>{
+      this.user = state;
+    })
   }
 
   ngOnDestroy() {

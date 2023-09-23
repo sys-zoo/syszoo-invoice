@@ -25,7 +25,7 @@ export class ManageCustomerComponent {
 
   addProductItem() {
     var index = this.listOfProductsItem.length + 1;
-    var newItem: Product = { quantity: null, price: null };
+    var newItem: Product = { quantity: null, price: null, location: null, batch: null, tax:null };
     this.listOfProductsItem.push(newItem);
     console.log(this.listOfProductsItem);
     //this.invoiceContent.nativeElement.scrollTo({left: 0 , top: this.invoiceContent.nativeElement.scrollHeight - 100, behavior: 'smooth'});

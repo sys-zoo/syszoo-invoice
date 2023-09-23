@@ -29,6 +29,15 @@ import { ProductService } from './service/product.service';
 import { ManageCustomerComponent } from './views/customer/manage-customer/manage-customer.component';
 import { BuisnessConfigurationComponent } from './views/settings/buisness-configuration/buisness-configuration.component';
 import { InventoryDashboardComponent } from './views/inventory/inventory-dashboard/inventory-dashboard.component'
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider,GoogleSigninButtonDirective,
+} from '@abacritt/angularx-social-login';
+
+import { ManageLocationComponent } from './views/inventory/manage-location/manage-location.component';
+import { ManageBatchesComponent } from './views/inventory/manage-batches/manage-batches.component';
+import { ManageTaxComponent } from './views/inventory/manage-tax/manage-tax.component'
 
 @NgModule({
   declarations: [
@@ -48,7 +57,10 @@ import { InventoryDashboardComponent } from './views/inventory/inventory-dashboa
     LeftpanelComponent,
     ManageCustomerComponent,
     BuisnessConfigurationComponent,
-    InventoryDashboardComponent
+    InventoryDashboardComponent,
+    ManageLocationComponent,
+    ManageBatchesComponent,
+    ManageTaxComponent
   ],
   imports: [
     BrowserModule,
@@ -60,8 +72,31 @@ import { InventoryDashboardComponent } from './views/inventory/inventory-dashboa
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
+    SocialLoginModule,
   ],
-  providers: [importProvidersFrom(MatNativeDateModule), InvoiceDataService, ProductService],
+  providers: [importProvidersFrom(MatNativeDateModule), InvoiceDataService, ProductService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '592933818484-8fvdho9laab21o4guqqibelpmu7kbuv5.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('847504206672279')
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
