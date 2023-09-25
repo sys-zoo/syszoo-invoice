@@ -45,7 +45,7 @@
                   </div>
                 </div>
 
-                <div class="container-fluid">
+                <!-- <div class="container-fluid">
                   <div class="row">
                     <div class="col-12 col-md-4">
                       <label  class="form-label hidelbl" >Customer No</label>
@@ -60,7 +60,7 @@
                       <input class="costomer-input" type="text" max="10" maxlength="10" placeholder="Phone Number">
                     </div>
                   </div>
-                </div>
+                </div> -->
 
               </div>
             </div>
@@ -69,49 +69,40 @@
             <div class="h-lg-100 d-flex flex-column">
               <div class="row justify-content-center bg-purple">
                 <div #invoiceContent style="height:60vh;overflow:auto;">
-                  <label for="exampleInputEmail1" class="form-label" style="margin-top: 30px;">Product Items</label>
+                  <label for="exampleInputEmail1" class="form-label" style="margin-top: 30px;">Costumers</label>
                   <table class="table">
                     <thead>
                       <tr>
                         <th scope="col" style="width: 5%;">#</th>
-                        <th scope="col" style="width: 10%;">Date</th>
-                        <th scope="col" style="width: 15%;">ProductID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col" style="width: 12%;">Quantity</th>
-                        <th scope="col" style="width: 15%;">Price</th>
+                        <th scope="col" style="width: 15%;">ID</th>
+                        <th scope="col">Costumer Name</th>
+                        <th scope="col" style="width: 12%;">Phone Number</th>
                         <th scope="col" style="width: 10%;">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let product of listOfProductsItem; let itemIndex = index;">
+                      <tr *ngFor="let Customer of ListOfCustomer; let itemIndex = index;">
                         <th scope="row">
-                          <input value="{{itemIndex + 1}}" (focus)="onItemFocus(itemIndex)" [disabled]="true"
+                          <input value="{{itemIndex + 1}}"  [disabled]="true"
                             class="form-control ng-pristine ng-valid ng-touched">
                         </th>
+                       
                         <td>
-                          <input [(ngModel)]="date" (focus)="onItemFocus(itemIndex)" class="form-control ng-pristine ng-valid ng-touched">
-                        </td>
-                        <td>
-                          <input [(ngModel)]="product.id" (focus)="onItemFocus(itemIndex)" list="productIds"
+                          <input  [(ngModel)]="Customer.id" [disabled]="true"  list="productIds"
                             class="{{validation? 'is-invalid': ' ' }} form-control ng-pristine ng-valid ng-touched">
                         </td>
                         <td>
-                          <input [(ngModel)]="product.name" (focus)="onItemFocus(itemIndex)" list="products"
+                          <input [(ngModel)]="Customer.name"  [disabled]="true"   list="products"
                             class="{{validation? 'is-invalid': ' ' }} form-control ng-pristine ng-valid ng-touched">
-                          <datalist id="products">
+                          <!-- <datalist id="products">
                             <option *ngFor="let opt of listOfProductsItem" [value]="opt">
-                          </datalist>
+                          </datalist> -->
                         </td>
                         <td>
-                          <input type="number" min="0" [(ngModel)]="product.quantity"
-                            (ngModelChange)="onItemSpecChange(itemIndex)" (focus)="onItemFocus(itemIndex)"
-                            [OnlyNumber]=true class="{{validation? 'is-invalid': ' ' }} form-control ng-pristine ng-valid ng-touched">
+                          <input [(ngModel)]="Customer.phone" [disabled]="true"  list="productIds"
+                            class="{{validation? 'is-invalid': ' ' }} form-control ng-pristine ng-valid ng-touched">
                         </td>
-                        <td>
-                          <input type="number" min="0" [(ngModel)]="product.price"
-                            (ngModelChange)="onItemSpecChange(itemIndex)" (focus)="onItemFocus(itemIndex)"
-                            [OnlyNumber]=true class="{{validation? 'is-invalid': ' ' }} form-control ng-pristine ng-valid ng-touched">
-                        </td>
+                       
                         <td>
                           <div class="d-flex justyfy-content-around align-item-center mt-1">
 
@@ -145,9 +136,10 @@
                   </div>
 
                   <div class="row col-2">
-                    <button class="btn btn-primary w-100 rounded-2" (click)="onSaveProductList()">
+                    <button class="btn btn-primary w-100 rounded-2" (click)="print()">
                       Save
                     </button>
+                    
                   </div>
                 </div>
 
