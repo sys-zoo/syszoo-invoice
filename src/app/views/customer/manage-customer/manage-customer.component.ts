@@ -28,8 +28,7 @@ export class ManageCustomerComponent {
     
   }
 
-  
-
+    //this.invoiceContent.nativeElement.scrollTo({left: 0 , top: this.invoiceContent.nativeElemen
   onItemSpecChange(index) {
   }
 
