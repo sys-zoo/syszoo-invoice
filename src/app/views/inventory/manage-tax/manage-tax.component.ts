@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Tax } from 'src/app/model/response/Tax';
 import { TaxService } from 'src/app/service/tax.service';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-manage-tax',
   templateUrl: './manage-tax.component.html',
@@ -42,13 +44,11 @@ export class ManageTaxComponent {
     this.listOfTaxDetails = this.InventoryTaxService.delete(index);
   }
 
-  onSaveProductList() {
-    for (let i = 0; i < this.listOfTaxDetails.length; i++){
-      if(this.listOfTaxDetails[i].id === undefined) {
-        this.listOfTaxDetails.splice(i, this.listOfTaxDetails.length);
-      }
-    }
-    this.InventoryTaxService.save(this.listOfTaxDetails);
-    alert("successful");
+  
+  alertWithSuccess(){
+    Swal.fire({
+      title: 'saved successfully',
+      icon:'success'
+    })
   }
 }
